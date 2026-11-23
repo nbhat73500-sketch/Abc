@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.budgetmanagement.app",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:7D:0F:52:AB:FC:02:D5:77:E5:83:A0:98:3A:45:32:0C:5E:2B:64:B4:7B:66:94:E5:58:65:B2:D6:7A"
+      ]
+    }
+  }
+]

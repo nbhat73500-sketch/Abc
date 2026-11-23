@@ -1,0 +1,6 @@
+{
+  "name": "Smart Daily Expenses Tracker & Financial Manager",
+  "description": "Professional daily income, expense, and budget management system with multi-account ledgers, analytics, and Indian Rupee financial reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

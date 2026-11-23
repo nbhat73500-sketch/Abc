@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidRoomId(roomId) {
+      return roomId is string && roomId.matches('^[0-9]{6}$');
+    }
+
+    function isValidSubcollection(sub) {
+      return sub in [
+        'accounts',
+        'categories',
+        'budgets',
+        'transactions',
+        'debts',
+        'recurring',
+        'savings',
+        'loans',
+        'audit_logs',
+        'meta',
+        'otp_sessions'
+      ];
+    }
+
+    // App users (Google Sign-In UIDs or local profiles) and their financial subcollections
+    match /users/{userId} {
+      allow read, write: if userId is string && userId.size() > 0 && userId.size() <= 128;
+
+      match /{subcollection}/{docId} {
+        allow read, write: if userId is string
+          && userId.size() > 0
+          && userId.size() <= 128
+          && isValidSubcollection(subcollection);
+      }
+    }
+
+    // Shared 6-digit Sync Rooms for real-time Mobile <-> Desktop device linking
+    match /sync_rooms/{roomId} {
+      allow read, write: if isValidRoomId(roomId);
+
+      match /{subcollection}/{docId} {
+        allow read, write: if isValidRoomId(roomId) && isValidSubcollection(subcollection);
+      }
+    }
+
+    // Health check and connection probes
+    match /test/{docId} {
+      allow read, write: if docId == 'connection';
+    }
+
+    // Default deny for unknown collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

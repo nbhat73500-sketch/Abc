@@ -1,0 +1,209 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role-based access control",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "manager", "data_entry"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "role"]
+    },
+    "Account": {
+      "title": "Account",
+      "description": "Financial bank, cash, wallet or credit card account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["cash", "bank", "wallet", "credit_card"] },
+        "initialBalance": { "type": "number" },
+        "balance": { "type": "number" },
+        "color": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "bankName": { "type": "string" },
+        "creditLimit": { "type": "number" },
+        "notes": { "type": "string" },
+        "userId": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "type", "initialBalance", "userId"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Income and expense category definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["expense", "income", "both"] },
+        "icon": { "type": "string" },
+        "color": { "type": "string" },
+        "subcategories": { "type": "array" },
+        "monthlyBudget": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "name", "type", "userId"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Budget allocation definition for period and categories",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "period": { "type": "string", "enum": ["daily", "weekly", "monthly", "yearly", "custom"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "allocatedAmount": { "type": "number" },
+        "categoryBudgets": { "type": "object" },
+        "alertThresholds": { "type": "array" },
+        "userId": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "period", "allocatedAmount", "userId"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income, expense or internal transfer record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["expense", "income", "transfer"] },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "amount": { "type": "number" },
+        "categoryId": { "type": "string" },
+        "subcategory": { "type": "string" },
+        "description": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "accountId": { "type": "string" },
+        "toAccountId": { "type": "string" },
+        "vendor": { "type": "string" },
+        "receiptUrl": { "type": "string" },
+        "receiptName": { "type": "string" },
+        "notes": { "type": "string" },
+        "tag": { "type": "string" },
+        "isReconciled": { "type": "boolean" },
+        "createdBy": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "type", "date", "amount", "accountId", "userId"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Security and transaction audit entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "entityType": { "type": "string" },
+        "entityId": { "type": "string" },
+        "performedBy": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "action", "timestamp", "userId"]
+    },
+    "LoanAccount": {
+      "title": "LoanAccount",
+      "description": "Outstanding balance and EMI payable loan liability account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "lenderName": { "type": "string" },
+        "loanName": { "type": "string" },
+        "loanReference": { "type": "string" },
+        "loanType": { "type": "string" },
+        "originalPrincipal": { "type": "number" },
+        "currentOutstandingPrincipal": { "type": "number" },
+        "emiAmount": { "type": "number" },
+        "interestRateAnnual": { "type": "number" },
+        "tenureMonths": { "type": "number" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "emiDueDay": { "type": "number" },
+        "paymentFrequency": { "type": "string" },
+        "linkedBankAccountId": { "type": "string" },
+        "autoDebitApproved": { "type": "boolean" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" },
+        "schedule": { "type": "array" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "lenderName", "loanReference", "originalPrincipal", "currentOutstandingPrincipal", "emiAmount", "interestRateAnnual", "startDate", "linkedBankAccountId", "userId"]
+    },
+    "SyncRoom": {
+      "title": "SyncRoom",
+      "description": "6-digit Mobile-to-Desktop sync room metadata with optional hashed passcode and heartbeat",
+      "type": "object",
+      "properties": {
+        "roomCode": { "type": "string" },
+        "passcodeHash": { "type": "string" },
+        "hasPasscode": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "lastSyncedAt": { "type": "string" },
+        "lastSyncedBy": { "type": "string" }
+      },
+      "required": ["roomCode", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and RBAC assignment"
+    },
+    "/users/{userId}/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "Financial accounts belonging to user"
+    },
+    "/users/{userId}/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "User customizable budget and spending categories"
+    },
+    "/users/{userId}/budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "Allocated budgets for user"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Daily income, expense and transfer ledger"
+    },
+    "/users/{userId}/loans/{loanId}": {
+      "schema": "LoanAccount",
+      "description": "Outstanding loan liabilities and EMI amortization schedules"
+    },
+    "/users/{userId}/audit_logs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Immutable audit trails for compliance"
+    },
+    "/sync_rooms/{roomId}": {
+      "schema": "SyncRoom",
+      "description": "Shared 6-digit Sync Room linking Mobile and Desktop instances"
+    },
+    "/sync_rooms/{roomId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Synchronized transactions in a shared Sync Room"
+    },
+    "/sync_rooms/{roomId}/accounts/{accountId}": {
+      "schema": "Account",
+      "description": "Synchronized accounts in a shared Sync Room"
+    },
+    "/sync_rooms/{roomId}/loans/{loanId}": {
+      "schema": "LoanAccount",
+      "description": "Synchronized loans and EMI schedules in a shared Sync Room"
+    }
+  }
+}

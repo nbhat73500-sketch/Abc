@@ -1,0 +1,51 @@
+{
+  "id": "/",
+  "name": "Smart Daily Expenses Tracker & Financial Manager",
+  "short_name": "BudgetVault",
+  "description": "Offline-first daily income, expense, EMI loan, and multi-account budget manager with real-time Mobile-to-Desktop cloud sync.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#020617",
+  "theme_color": "#059669",
+  "lang": "en",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Expense",
+      "short_name": "New Expense",
+      "description": "Quickly record a new transaction",
+      "url": "/?action=new_expense",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Monthly Summary",
+      "short_name": "Summary",
+      "description": "View monthly financial report and statement",
+      "url": "/?action=summary",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
